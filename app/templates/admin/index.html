@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Employee List (Admin Side)</h2> 
+
+<a href="{{ url_for('main.add_employee') }}" class="btn btn-primary mb-3">Add Employee</a>
+<table class="table table-bordered">
+    <thead>
+        <tr><th>ID</th><th>Name</th><th>Membership</th><th>Rate</th><th>Hours</th><th>Net Pay</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.membership }}</td>
+            <td>{{ employee.rate }}</td>
+            <td>{{ employee.hours }}</td>
+            <td>{{ employee.netpay }}</td>
+            <td>
+                <a href="{{ url_for('main.edit_employee', id=employee.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ url_for('main.delete_employee', id=employee.id) }}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('auth.logout') }}" class="btn btn-danger">
+    Logout
+</a>
+{% endblock %}
