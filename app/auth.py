@@ -40,8 +40,11 @@ def login():
         if user and user.check_password(password):
             session["user_id"] = user.id
             session["role"] = user.role
-            return redirect(url_for("main.dashboard"))
-
+            
+            if user.role == 'admin':
+                return redirect(url_for("main.admin_area"))
+            else: 
+                return redirect(url_for("main.dashboard"))
         flash("Invalid email or password", "danger")
 
     return render_template("login.html")
